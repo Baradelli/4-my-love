@@ -10,7 +10,7 @@
   font-size: 3rem;
   color: #ffdd57;
   text-shadow: 0 0 5px #ffdd57, 0 0 10px #ffdd57, 0 0 20px #ffdd57,
-    0 0 40px #ffdd57;
+    0 0 10px #ffdd57;
   z-index: 9999;
   pointer-events: none;
 }
