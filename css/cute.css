@@ -1,0 +1,243 @@
+* {
+  font-family: "Cookie", sans-serif;
+}
+
+/* Título Neon em Amarelo (exemplo) */
+.neon-title {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  color: #ffdd57;
+  text-shadow: 0 0 5px #ffdd57, 0 0 10px #ffdd57, 0 0 20px #ffdd57,
+    0 0 40px #ffdd57;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Botão para abrir a carta */
+.open-letter {
+  position: relative;
+  padding: 0.8rem 1.5rem;
+  width: fit-content;
+  margin: auto;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #000;
+  background-color: #ffed91;
+  border: none;
+  border-radius: 5px;
+  text-shadow: 0 0 5px #ffdd57;
+  box-shadow: 0 0 10px #ffdd57;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.open-letter:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #ffdd57;
+}
+
+/* ---------------- MODAL (A CARTA) ---------------- */
+.letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* IMPORTANTE: vamos começar a carta fora do campo de visão 
+     (ou "colada" mas em scale=0) para animar a entrada */
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+
+  width: 80%;
+  max-width: 600px;
+  height: 50%;
+  overflow-y: auto;
+  background: rgba(255, 255, 224, 0.95);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 9999;
+  box-shadow: 0 0 15px rgba(255, 221, 87, 0.4);
+  font-family: "Satisfy", cursive;
+
+  /* Damos display "block" por padrão, mas fica invisível pela classe .hidden */
+  display: block;
+}
+
+/* Estilizando o scroll para navegadores baseados em WebKit */
+.letter::-webkit-scrollbar {
+  width: 20px; /* Largura do scrollbar */
+  border-radius: 6px; /* Arredondamento */
+  background: rgba(255, 221, 87, 0.2); /* Fundo claro */
+}
+
+.letter::-webkit-scrollbar-thumb {
+  background-color: #cc9a00; /* Cor amarelo escuro */
+  border-radius: 6px; /* Arredondamento */
+  border: 3px solid rgba(255, 255, 224, 0.95); /* Espaço entre o thumb e a barra */
+}
+
+/* Texto da carta */
+.letter p {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Botão de fechar a carta */
+.close-letter-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  background: #ffed91;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  text-shadow: 0 0 2px #ffdd57;
+  box-shadow: 0 0 10px #ffdd57;
+  transition: 0.3s ease;
+}
+
+.close-letter-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ESCONDER O MODAL QUANDO .hidden ESTÁ PRESENTE */
+.hidden {
+  display: none; /* Simplesmente não exibe o modal */
+}
+
+/* QUANDO .show ESTÁ PRESENTE, EXECUTA UMA ANIMAÇÃO @keyframes */
+.show {
+  animation: letterIn 0.8s ease forwards;
+}
+
+/* KEYFRAMES: "subir" e dar um pequeno "bounce" fofo */
+@keyframes letterIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, -54%) scale(1.1);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, -48%) scale(0.95);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Remover qualquer miolo branco, se ainda existir */
+.flower__white-circle {
+  display: none !important;
+}
+
+/* Ajuste geral para as pétalas */
+.flower__leaf {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-origin: bottom center;
+
+  /* Pétala mais estreita e alta (ajuste livremente) */
+  width: 5vmin;
+  height: 14vmin;
+
+  /* Deixa a parte de cima mais pontudinha */
+  border-radius: 50% 50% 10% 10% / 90% 90% 10% 10%;
+
+  /* Cor amarela em gradiente, para tulipa */
+  background-color: #ffea00; /* amarelo vivo */
+  background-image: linear-gradient(to top, #ffd600, #fff9c4);
+  opacity: 0.95;
+  box-shadow: inset 0 0 1vmin rgba(255, 255, 255, 0.4);
+}
+
+/* Petais duplicadas (vai do --1 ao --8).
+   Cada uma com um ângulo de rotação para ficarem distribuídas. */
+
+/* Pétalas frontais mais “retas” */
+.flower__leaf--1 {
+  transform: rotate(0deg) translateX(-50%);
+}
+.flower__leaf--2 {
+  transform: rotate(20deg) translateX(-50%);
+}
+.flower__leaf--3 {
+  transform: rotate(-20deg) translateX(-50%);
+}
+
+/* Pétalas intermédias (para dar sensação de volume) */
+.flower__leaf--4 {
+  transform: rotate(40deg) translateX(-50%) scale(0.95);
+}
+.flower__leaf--5 {
+  transform: rotate(-40deg) translateX(-50%) scale(0.95);
+}
+
+/* Pétalas “de trás”, podem ser um pouco menores e com cor mais suave (opcional) */
+.flower__leaf--6 {
+  transform: rotate(60deg) translateX(-50%) scale(0.9);
+  opacity: 0.9;
+}
+.flower__leaf--7 {
+  transform: rotate(-60deg) translateX(-50%) scale(0.9);
+  opacity: 0.9;
+}
+.flower__leaf--8 {
+  transform: rotate(180deg) translateX(-50%) scale(0.8);
+  opacity: 0.8;
+}
+
+/* Opcional: reduzir ou trocar a cor do “glow” que ficava atrás das pétalas */
+.flower__leafs::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* glow amarelo */
+  background-color: #ffe600;
+  filter: blur(6vmin);
+  width: 8vmin;
+  height: 8vmin;
+  transform: translate(-50%, -100%);
+}
+
+/* */
+
+/* Contêiner do Título+Botão fica acima da tela inicialmente */
+.title-button-wrap {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 15px;
+  width: 100%;
+  top: -270px; /* fica fora da tela */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  text-align: center;
+}
+
+/* Quando adicionamos .fallIn, executamos a animação “dropDown” */
+.title-button-wrap.fallIn {
+  animation: dropDown 1.2s ease forwards;
+}
+
+/* Keyframes: cai de -150px até 100px, com leve bounce */
+@keyframes dropDown {
+  0% {
+    top: -270px; /* Começa bem acima da tela */
+  }
+  70% {
+    top: 55px; /* Passa um pouco da posição final */
+  }
+  100% {
+    top: 35px; /* Posição final */
+  }
+}
